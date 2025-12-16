@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { 
   Terminal, 
   Brain, 
@@ -11,8 +12,11 @@ import {
   TrendingUp,
   Globe,
   BarChart3,
-  Lock
+  Lock,
+  ArrowRight
 } from "lucide-react";
+import { AnimatedCard } from "./AnimatedCard";
+import { AnimatedBackground } from "./AnimatedBackground";
 
 const products = [
   {
@@ -22,6 +26,7 @@ const products = [
     description: "Multi-exchange trading with smart order routing, advanced order types, and real-time analytics. Sub-100ms latency across 50+ exchanges.",
     features: ["Smart Order Routing", "50+ Exchanges", "Advanced Orders", "Real-time Analytics"],
     gradient: "from-primary to-blue-400",
+    path: "/terminal",
   },
   {
     icon: Brain,
@@ -30,6 +35,7 @@ const products = [
     description: "Verified quantitative strategies with transparent backtesting. Deploy hedge fund-grade algorithms without coding expertise.",
     features: ["Verified Strategies", "No-Code Automation", "ML Integration", "Risk Management"],
     gradient: "from-purple-500 to-pink-500",
+    path: "/quant",
   },
   {
     icon: Megaphone,
@@ -38,6 +44,7 @@ const products = [
     description: "Transform impressions into measurable trading volume. Performance-based campaigns with verified KOL network.",
     features: ["Volume Attribution", "KOL Network", "Campaign Analytics", "ROI Tracking"],
     gradient: "from-accent to-orange-400",
+    path: "/syndicate",
   },
 ];
 
@@ -56,99 +63,145 @@ export function Features() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
+      <AnimatedBackground variant="grid" intensity="low" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
       
       <div className="container mx-auto px-6 relative z-10">
-        {/* Section Header */}
+        {/* Section Header - more natural */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="text-center max-w-3xl mx-auto mb-20"
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-3xl mx-auto mb-16 md:mb-24"
         >
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
-            Products
-          </span>
-          <h2 className="font-display font-bold text-3xl md:text-5xl mb-6">
-            Three Products, One Ecosystem
+          <motion.span
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className="text-primary font-mono text-xs tracking-wider uppercase mb-6 block"
+          >
+            Our Products
+          </motion.span>
+          <h2 className="font-display font-bold text-3xl md:text-5xl mb-6 leading-tight">
+            Three products, one mission
           </h2>
-          <p className="text-muted-foreground text-lg">
-            Each product creates value independently while generating network effects that compound across the entire platform.
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Each product works on its own, but together they create something bigger. 
+            The more you use, the better everything gets.
           </p>
         </motion.div>
 
-        {/* Product Cards */}
-        <div className="grid md:grid-cols-3 gap-8 mb-32">
+        {/* Product Cards - varied sizes and organic feel */}
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-32">
           {products.map((product, index) => (
-            <motion.div
+            <AnimatedCard
               key={product.name}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
-              className="group"
+              delay={index * 0.15}
+              tiltIntensity={8}
+              glowOnHover={index === 1}
+              className="h-full"
             >
-              <div className="glass rounded-2xl p-8 h-full hover:bg-card/60 transition-all duration-300 border border-border/50 hover:border-primary/30">
-                {/* Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${product.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <product.icon className="w-7 h-7 text-white" />
-                </div>
+              <Link to={product.path} className="block h-full">
+                <motion.div
+                  className="glass rounded-2xl md:rounded-3xl p-7 md:p-9 h-full hover:bg-card/50 transition-all duration-500 border border-border/40 hover:border-primary/30 cursor-pointer relative overflow-hidden group"
+                  whileHover={{ y: -4 }}
+                >
+                  {/* Subtle background gradient */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+                  
+                  {/* Icon - more dynamic */}
+                  <motion.div
+                    className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
+                    whileHover={{ rotate: [0, -5, 5, 0] }}
+                  >
+                    <product.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
+                  </motion.div>
 
-                {/* Content */}
-                <div className="mb-6">
-                  <span className="text-xs font-mono text-muted-foreground tracking-wider uppercase">
-                    {product.tagline}
-                  </span>
-                  <h3 className="font-display font-bold text-2xl mt-2 mb-3">{product.name}</h3>
-                  <p className="text-muted-foreground">{product.description}</p>
-                </div>
+                  {/* Content */}
+                  <div className="mb-6 relative z-10">
+                    <span className="text-xs font-mono text-muted-foreground tracking-wider uppercase mb-3 block">
+                      {product.tagline}
+                    </span>
+                    <h3 className="font-display font-bold text-2xl md:text-3xl mt-2 mb-4 leading-tight">
+                      {product.name}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm md:text-base">
+                      {product.description}
+                    </p>
+                  </div>
 
-                {/* Features */}
-                <ul className="space-y-2">
-                  {product.features.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <div className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${product.gradient}`} />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
+                  {/* Features - more organic */}
+                  <ul className="space-y-2.5 mb-6 relative z-10">
+                    {product.features.map((feature, idx) => (
+                      <motion.li
+                        key={feature}
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : {}}
+                        transition={{ delay: index * 0.15 + idx * 0.05 }}
+                        className="flex items-center gap-3 text-sm text-muted-foreground"
+                      >
+                        <motion.div
+                          className={`w-2 h-2 rounded-full bg-gradient-to-r ${product.gradient}`}
+                          animate={{ scale: [1, 1.2, 1] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: idx * 0.2 }}
+                        />
+                        {feature}
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  {/* Learn More Link - more prominent */}
+                  <motion.div
+                    className="flex items-center gap-2 text-primary text-sm font-semibold relative z-10 group-hover:gap-3 transition-all"
+                    whileHover={{ x: 4 }}
+                  >
+                    Learn more
+                    <ArrowRight className="w-4 h-4" />
+                  </motion.div>
+                </motion.div>
+              </Link>
+            </AnimatedCard>
           ))}
         </div>
 
-        {/* Advantages Grid */}
+        {/* Advantages Grid - less uniform */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-12"
         >
           <h3 className="font-display font-bold text-2xl md:text-3xl mb-4">
-            Why TA Quant?
+            Why traders choose us
           </h3>
-          <p className="text-muted-foreground max-w-xl mx-auto">
-            Built from the ground up for professional traders who demand institutional-grade infrastructure.
+          <p className="text-muted-foreground max-w-xl mx-auto leading-relaxed">
+            We built this because we needed it ourselves. No compromises, no shortcuts.
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
           {advantages.map((advantage, index) => (
-            <motion.div
+            <AnimatedCard
               key={advantage.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-              className="flex items-start gap-4 p-6 rounded-xl bg-secondary/30 hover:bg-secondary/50 transition-colors"
+              delay={0.5 + index * 0.08}
+              className="h-full"
             >
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                <advantage.icon className="w-5 h-5 text-primary" />
-              </div>
-              <div>
-                <h4 className="font-semibold mb-1">{advantage.title}</h4>
-                <p className="text-sm text-muted-foreground">{advantage.description}</p>
-              </div>
-            </motion.div>
+              <motion.div
+                className="flex items-start gap-4 p-6 md:p-7 rounded-xl md:rounded-2xl bg-secondary/20 hover:bg-secondary/40 transition-all duration-300 border border-border/20 hover:border-border/40 h-full"
+                whileHover={{ scale: 1.02, y: -2 }}
+              >
+                <motion.div
+                  className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"
+                  whileHover={{ rotate: 5, scale: 1.1 }}
+                >
+                  <advantage.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                </motion.div>
+                <div className="flex-1">
+                  <h4 className="font-semibold mb-2 text-base md:text-lg">{advantage.title}</h4>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{advantage.description}</p>
+                </div>
+              </motion.div>
+            </AnimatedCard>
           ))}
         </div>
       </div>
