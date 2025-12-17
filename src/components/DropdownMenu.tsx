@@ -13,10 +13,17 @@ interface DropdownMenuProps {
   label: string;
   items: DropdownItem[];
   isActive?: boolean;
+  onItemClick?: (item: DropdownItem) => void;
 }
 
-export function DropdownMenu({ label, items, isActive }: DropdownMenuProps) {
+export function DropdownMenu({ label, items, isActive, onItemClick }: DropdownMenuProps) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleItemClick = (item: DropdownItem) => {
+    if (onItemClick) {
+      onItemClick(item);
+    }
+  };
 
   return (
     <div
@@ -48,6 +55,7 @@ export function DropdownMenu({ label, items, isActive }: DropdownMenuProps) {
               <Link
                 key={item.path}
                 to={item.path}
+                onClick={() => handleItemClick(item)}
                 className="block px-4 py-3 rounded-lg hover:bg-secondary/50 transition-colors group"
               >
                 <div className="font-medium text-foreground group-hover:text-primary transition-colors">

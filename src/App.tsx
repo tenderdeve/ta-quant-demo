@@ -14,6 +14,12 @@ import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import Pricing from "./pages/Pricing";
 import Developers from "./pages/Developers";
+import SignupDemo from "./pages/SignupDemo";
+import Exchanges from "./pages/solutions/Exchanges";
+import Funds from "./pages/solutions/Funds";
+import Traders from "./pages/solutions/Traders";
+import HedgeFunds from "./pages/solutions/HedgeFunds";
+import DataEngines from "./pages/solutions/DataEngines";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +42,12 @@ const App = () => (
           <Route path="/developers" element={<Developers />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/signup-demo" element={<SignupDemo />} />
+          <Route path="/solutions/exchanges" element={<Exchanges />} />
+          <Route path="/solutions/funds" element={<Funds />} />
+          <Route path="/solutions/traders" element={<Traders />} />
+          <Route path="/solutions/hedge-funds" element={<HedgeFunds />} />
+          <Route path="/solutions/data-engines" element={<DataEngines />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

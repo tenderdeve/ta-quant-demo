@@ -1,40 +1,43 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DropdownMenu } from "./DropdownMenu";
+
+const SOLUTION_STORAGE_KEY = "selectedSolution";
+
+// Solution IDs: 1=exchanges, 2=funds, 3=pro traders, 4=hedge funds, 5=data engines
+const getSolutionId = (path: string): number | null => {
+  if (path.includes("/solutions/exchanges")) return 1;
+  if (path.includes("/solutions/funds")) return 2;
+  if (path.includes("/solutions/traders")) return 3;
+  if (path.includes("/solutions/hedge-funds")) return 4;
+  if (path.includes("/solutions/data-engines")) return 5;
+  return null;
+};
 
 const navLinks = [
   { name: "Home", path: "/" },
   {
     name: "Products",
     dropdown: [
+      { name: "Quant", path: "/quant", description: "Trading Intelligence" },
       { name: "Terminal", path: "/terminal", description: "Execution Infrastructure" },
-      { name: "TA Quant", path: "/quant", description: "Trading Intelligence" },
-      { name: "TA Syndicate", path: "/syndicate", description: "Marketing Attribution" },
+      { name: "Syndicate", path: "/syndicate", description: "Marketing Attribution" },
     ],
   },
   {
     name: "Solutions",
     dropdown: [
-      { name: "For Pro Traders", path: "/solutions/traders" },
-      { name: "For Funds", path: "/solutions/funds" },
-      { name: "For Exchanges", path: "/solutions/exchanges" },
-      { name: "For KOLs", path: "/solutions/kol" },
+      { name: "Exchanges", path: "/solutions/exchanges" },
+      { name: "Funds", path: "/solutions/funds" },
+      { name: "Pro Traders", path: "/solutions/traders" },
+      { name: "Hedge Funds", path: "/solutions/hedge-funds" },
+      { name: "Data Engines", path: "/solutions/data-engines" },
     ],
   },
-  { name: "Pricing", path: "/pricing" },
   { name: "Developers", path: "/developers" },
-  {
-    name: "Resources",
-    dropdown: [
-      { name: "Resources Hub", path: "/resources" },
-      { name: "Whitepaper", path: "/resources#whitepaper" },
-      { name: "Blog", path: "/resources#blog" },
-      { name: "Case Studies", path: "/resources#case-studies" },
-    ],
-  },
   {
     name: "Company",
     dropdown: [
@@ -49,6 +52,7 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +65,29 @@ export function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [location]);
+
+  // Track solution selection
+  const handleSolutionClick = (item: { path: string }) => {
+    const solutionId = getSolutionId(item.path);
+    if (solutionId) {
+      localStorage.setItem(SOLUTION_STORAGE_KEY, solutionId.toString());
+    }
+  };
+
+  // Handle pricing click based on selected solution
+  const handlePricingClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const selectedSolution = localStorage.getItem(SOLUTION_STORAGE_KEY);
+    const solutionId = selectedSolution ? parseInt(selectedSolution) : null;
+    
+    // Solution 3 (pro traders) goes to signup demo, others (1,2,4,5) go to contact
+    // If no solution selected, default to contact page
+    if (solutionId === 3) {
+      navigate("/signup-demo");
+    } else {
+      navigate("/contact");
+    }
+  };
 
   return (
     <motion.header
@@ -99,6 +126,7 @@ export function Navbar() {
                   label={link.name}
                   items={link.dropdown}
                   isActive={isActive}
+                  onItemClick={link.name === "Solutions" ? handleSolutionClick : undefined}
                 />
               );
             }
@@ -122,6 +150,24 @@ export function Navbar() {
               </Link>
             );
           })}
+          {/* Pricing Link */}
+          {/* <a
+            href="#"
+            onClick={handlePricingClick}
+            className={`relative font-medium transition-colors hover:text-primary ${
+              location.pathname === "/contact" || location.pathname === "/signup-demo"
+                ? "text-primary"
+                : "text-muted-foreground"
+            }`}
+          >
+            Pricing
+            {(location.pathname === "/contact" || location.pathname === "/signup-demo") && (
+              <motion.div
+                layoutId="activeNav"
+                className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+              />
+            )}
+          </a> */}
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
@@ -161,6 +207,7 @@ export function Navbar() {
                         <Link
                           key={item.path}
                           to={item.path}
+                          onClick={() => link.name === "Solutions" && handleSolutionClick(item)}
                           className={`pl-4 font-medium py-2 transition-colors ${
                             location.pathname === item.path
                               ? "text-primary"
@@ -187,6 +234,21 @@ export function Navbar() {
                   </Link>
                 );
               })}
+              {/* Pricing Link for Mobile */}
+              {/* <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handlePricingClick(e);
+                }}
+                className={`font-medium py-2 transition-colors ${
+                  location.pathname === "/contact" || location.pathname === "/signup-demo"
+                    ? "text-primary"
+                    : "text-muted-foreground"
+                }`}
+              >
+                Pricing
+              </a> */}
               <div className="flex flex-col gap-3 pt-4 border-t border-border">
                 <Button variant="ghost" className="justify-start">
                   Sign In
