@@ -140,8 +140,17 @@ const Technology = () => {
       </section>
 
       {/* Tech Stack Section */}
-      <section ref={stackRef} className="py-20 bg-card/30">
-        <div className="container mx-auto px-6">
+      <section ref={stackRef} className="py-20 bg-card/30 relative overflow-hidden">
+        {/* Infrastructure Background Image */}
+        <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+            style={{ backgroundImage: 'url(/infrastructure-bg.png)' }}
+          />
+          <div className="absolute inset-0 bg-background/60" />
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={stackInView ? { opacity: 1, y: 0 } : {}}

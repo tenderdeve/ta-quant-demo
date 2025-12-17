@@ -14,10 +14,31 @@ const stats = [
 export function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-background">
+      {/* Hero Background Images */}
+      <div className="absolute inset-0 z-0">
+        {/* Primary hero background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: 'url(/hero-bg-1.png)' }}
+        />
+        {/* Secondary hero background overlay */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+          style={{ backgroundImage: 'url(/hero-bg-2.png)' }}
+        />
+        {/* Fallback hero background */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-15"
+          style={{ backgroundImage: 'url(/hero-bg.jpg)' }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-background/40" />
+      </div>
+      
       {/* Flowing Colors Background */}
       <FlowingColors 
         colors={["#00ff88", "#4dde80", "#00ffd1"]}
-        className="z-0"
+        className="z-0 opacity-60"
       />
 
       <div className="container mx-auto px-6 relative z-10">

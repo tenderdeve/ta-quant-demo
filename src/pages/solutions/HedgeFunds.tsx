@@ -118,7 +118,21 @@ const HedgeFundsPage = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
-        <AnimatedBackground variant="blobs" intensity="medium" />
+        {/* Hero Background Images */}
+        <div className="absolute inset-0 z-0">
+          {/* Primary hero background */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+            style={{ backgroundImage: 'url(/hero-bg-1.png)' }}
+          />
+          {/* Secondary hero background overlay */}
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{ backgroundImage: 'url(/hero-bg-2.png)' }}
+          />
+          {/* Dark overlay for text readability */}
+          <div className="absolute inset-0 bg-background/40" />
+        </div>
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
