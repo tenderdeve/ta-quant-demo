@@ -32,8 +32,8 @@ export function DropdownMenu({ label, items, isActive, onItemClick }: DropdownMe
       onMouseLeave={() => setIsOpen(false)}
     >
       <button
-        className={`flex items-center gap-1 font-medium transition-colors hover:text-primary ${
-          isActive ? "text-primary" : "text-muted-foreground"
+        className={`flex items-center gap-1 font-medium transition-colors hover:text-foreground ${
+          isActive ? "text-foreground" : "text-foreground/70"
         }`}
       >
         {label}

@@ -33,8 +33,8 @@ export function EcosystemSection() {
               transition={{ delay: 0.3 }}
               className="glass rounded-2xl p-6 border border-border/40 text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-blue-400 flex items-center justify-center mx-auto mb-4">
-                <Database className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4 glow-primary/30">
+                <Database className="w-6 h-6 text-primary" />
               </div>
               <h3 className="font-semibold mb-2">Terminal</h3>
               <p className="text-xs text-muted-foreground">Execution data</p>
@@ -56,8 +56,8 @@ export function EcosystemSection() {
               transition={{ delay: 0.5 }}
               className="glass rounded-2xl p-6 border border-border/40 text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center mx-auto mb-4">
-                <Brain className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4 glow-primary/30">
+                <Brain className="w-6 h-6 text-primary" />
               </div>
               <h3 className="font-semibold mb-2">TA Quant</h3>
               <p className="text-xs text-muted-foreground">Better strategies</p>
@@ -79,8 +79,8 @@ export function EcosystemSection() {
               transition={{ delay: 0.7 }}
               className="glass rounded-2xl p-6 border border-border/40 text-center"
             >
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-accent to-orange-400 flex items-center justify-center mx-auto mb-4">
-                <Megaphone className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto mb-4 glow-primary/30">
+                <Megaphone className="w-6 h-6 text-primary" />
               </div>
               <h3 className="font-semibold mb-2">Syndicate</h3>
               <p className="text-xs text-muted-foreground">More volume</p>
@@ -93,9 +93,9 @@ export function EcosystemSection() {
             transition={{ delay: 0.8 }}
             className="mt-8 text-center"
           >
-            <div className="inline-flex items-center gap-2 px-6 py-3 glass rounded-xl border border-primary/20">
+            <div className="inline-flex items-center gap-2 px-6 py-3 glass rounded-xl border border-primary/30">
               <TrendingUp className="w-5 h-5 text-primary" />
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-foreground/70">
                 Better execution → Better strategies → More volume → Better execution
               </span>
             </div>

@@ -27,6 +27,7 @@ const products = [
     features: ["Smart Order Routing", "50+ Exchanges", "Advanced Orders", "Real-time Analytics"],
     gradient: "from-primary to-blue-400",
     path: "/terminal",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop&q=80",
   },
   {
     icon: Brain,
@@ -36,6 +37,7 @@ const products = [
     features: ["Verified Strategies", "No-Code Automation", "ML Integration", "Risk Management"],
     gradient: "from-purple-500 to-pink-500",
     path: "/quant",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80",
   },
   {
     icon: Megaphone,
@@ -45,6 +47,7 @@ const products = [
     features: ["Volume Attribution", "KOL Network", "Campaign Analytics", "ROI Tracking"],
     gradient: "from-accent to-orange-400",
     path: "/syndicate",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop&q=80",
   },
 ];
 
@@ -63,8 +66,32 @@ export function Features() {
 
   return (
     <section ref={ref} className="py-32 relative overflow-hidden">
-      <AnimatedBackground variant="grid" intensity="low" />
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
+      <AnimatedBackground variant="blobs" intensity="medium" />
+      {/* Glowing green curved line effect */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <motion.svg
+          className="absolute bottom-0 left-0 w-full h-full"
+          style={{ opacity: 0.2 }}
+        >
+          <motion.path
+            d="M 0 400 Q 300 200 600 300 T 1200 300"
+            stroke="hsl(142, 76%, 50%)"
+            strokeWidth="3"
+            fill="none"
+            animate={{
+              pathLength: [0, 1, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
+              filter: "blur(3px)",
+            }}
+          />
+        </motion.svg>
+      </div>
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header - more natural */}
@@ -109,13 +136,21 @@ export function Features() {
                   {/* Subtle background gradient */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${product.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
                   
-                  {/* Icon - more dynamic */}
-                  <motion.div
-                    className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${product.gradient} flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}
-                    whileHover={{ rotate: [0, -5, 5, 0] }}
-                  >
-                    <product.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                  </motion.div>
+                  {/* Product Image */}
+                  <div className="relative w-full h-48 mb-6 rounded-xl overflow-hidden">
+                    <img 
+                      src={product.image} 
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
+                    <motion.div
+                      className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-primary/90 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 glow-primary"
+                      whileHover={{ rotate: [0, -5, 5, 0] }}
+                    >
+                      <product.icon className="w-6 h-6 text-black" />
+                    </motion.div>
+                  </div>
 
                   {/* Content */}
                   <div className="mb-6 relative z-10">
@@ -141,7 +176,7 @@ export function Features() {
                         className="flex items-center gap-3 text-sm text-muted-foreground"
                       >
                         <motion.div
-                          className={`w-2 h-2 rounded-full bg-gradient-to-r ${product.gradient}`}
+                          className="w-2 h-2 rounded-full bg-primary"
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 2, repeat: Infinity, delay: idx * 0.2 }}
                         />
@@ -191,7 +226,7 @@ export function Features() {
                 whileHover={{ scale: 1.02, y: -2 }}
               >
                 <motion.div
-                  className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"
+                  className="w-11 h-11 md:w-12 md:h-12 rounded-xl bg-primary/20 flex items-center justify-center shrink-0 glow-primary/50"
                   whileHover={{ rotate: 5, scale: 1.1 }}
                 >
                   <advantage.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />

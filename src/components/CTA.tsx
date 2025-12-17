@@ -53,9 +53,9 @@ export function CTA() {
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Button
                     size="lg"
-                    className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary text-lg px-10 py-7 rounded-xl"
+                    className="bg-primary hover:bg-primary/90 text-black font-semibold glow-primary text-lg px-10 py-7 rounded-md"
                   >
-                    Get Started Free
+                    GET STARTED
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
                 </motion.div>
@@ -63,7 +63,7 @@ export function CTA() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-border/50 hover:bg-secondary/50 text-lg px-10 py-7 rounded-xl backdrop-blur-sm"
+                    className="border-white/30 hover:bg-white/5 text-white text-lg px-10 py-7 rounded-md backdrop-blur-sm"
                   >
                     Contact Sales
                   </Button>

@@ -18,6 +18,7 @@ import {
   LineChart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { AnimatedBackground } from "@/components/AnimatedBackground";
 
 const features = [
   {
@@ -118,8 +119,7 @@ const TASyndicatePage = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
-        <div className="absolute top-1/4 -left-32 w-96 h-96 bg-accent/20 rounded-full blur-[128px]" />
-        <div className="absolute bottom-1/4 -right-32 w-96 h-96 bg-orange-500/20 rounded-full blur-[128px]" />
+        <AnimatedBackground variant="waves" intensity="high" />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div

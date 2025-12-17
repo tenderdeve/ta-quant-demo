@@ -43,15 +43,15 @@ export function ProofStrip() {
                 transition={{ delay: index * 0.1 }}
               >
                 <motion.div
-                  className={`w-10 h-10 md:w-12 md:h-12 rounded-lg bg-gradient-to-br ${proof.color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}
+                  className="w-10 h-10 md:w-12 md:h-12 rounded-lg bg-primary/20 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform glow-primary/30"
                   whileHover={{ rotate: 5 }}
                 >
-                  <proof.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
+                  <proof.icon className="w-5 h-5 md:w-6 md:h-6 text-primary" />
                 </motion.div>
-                <div className="font-display font-bold text-2xl md:text-3xl gradient-text mb-1">
+                <div className="font-display font-bold text-2xl md:text-3xl text-primary mb-1">
                   {proof.value}
                 </div>
-                <div className="text-xs md:text-sm text-muted-foreground">{proof.label}</div>
+                <div className="text-xs md:text-sm text-foreground/60 uppercase tracking-wider">{proof.label}</div>
               </motion.div>
             </FloatingCard>
           ))}

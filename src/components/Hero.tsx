@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Play, Zap, Shield, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AnimatedBackground } from "./AnimatedBackground";
 import { StaggerText } from "./AnimatedText";
+import FlowingColors from "./FlowingColors";
 
 const stats = [
   { value: "50+", label: "Exchanges" },
@@ -13,9 +13,12 @@ const stats = [
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-      <AnimatedBackground variant="blobs" intensity="medium" />
-      <div className="absolute inset-0 bg-grid-pattern bg-[size:50px_50px] opacity-[0.015]" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-background">
+      {/* Flowing Colors Background */}
+      <FlowingColors 
+        colors={["#00ff88", "#4dde80", "#00ffd1"]}
+        className="z-0"
+      />
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -27,9 +30,9 @@ export function Hero() {
             className="flex flex-wrap justify-center gap-3 mb-10"
           >
             {[
-              { label: "Execution", color: "from-primary to-blue-400" },
-              { label: "Intelligence", color: "from-purple-500 to-pink-500" },
-              { label: "Attribution", color: "from-accent to-orange-400" },
+              { label: "Execution", color: "from-primary to-accent" },
+              { label: "Intelligence", color: "from-primary to-accent" },
+              { label: "Attribution", color: "from-primary to-accent" },
             ].map((pill, index) => (
               <motion.div
                 key={pill.label}
@@ -37,7 +40,7 @@ export function Hero() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.3 + index * 0.1 }}
                 whileHover={{ scale: 1.05 }}
-                className={`px-4 py-2 rounded-full glass border border-border/40 bg-gradient-to-r ${pill.color} bg-opacity-10`}
+                className="px-4 py-2 rounded-full glass border border-primary/20 bg-primary/5"
               >
                 <span className="text-sm font-medium text-foreground">{pill.label}</span>
               </motion.div>
@@ -45,16 +48,11 @@ export function Hero() {
           </motion.div>
 
           {/* Main Headline - staggered text */}
-          <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8">
+          <h1 className="font-display font-bold text-4xl md:text-6xl lg:text-7xl leading-[1.1] mb-8 text-foreground">
             <StaggerText
-              text="The Operating System for"
+              text="All-in-One Crypto Command Center"
               className="block mb-2"
               delay={0.2}
-            />
-            <StaggerText
-              text="Professional Crypto Trading"
-              className="block gradient-text"
-              delay={0.6}
             />
           </h1>
 
@@ -63,10 +61,9 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
+            className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            We've unified execution, quantitative intelligence, and performance-driven marketing into one platform. 
-            Everything you need, nothing you don't.
+            Execute trades, monitor assets, and automate your strategy across top exchanges.
           </motion.p>
 
           {/* CTAs - varied spacing */}
@@ -79,9 +76,9 @@ export function Hero() {
             <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary text-lg px-10 py-7 rounded-xl"
+                className="bg-primary hover:bg-primary/90 text-black font-semibold glow-primary text-lg px-10 py-7 rounded-md"
               >
-                Get Demo
+                SIGN UP NOW
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </motion.div>
@@ -89,9 +86,9 @@ export function Hero() {
               <Button
                 size="lg"
                 variant="outline"
-                className="border-border/50 hover:bg-secondary/50 text-lg px-10 py-7 rounded-xl backdrop-blur-sm"
+                className="border-white/30 hover:bg-white/5 text-white text-lg px-10 py-7 rounded-md backdrop-blur-sm"
               >
-                Start Free
+                EXPLORE DOCS
               </Button>
             </motion.div>
           </motion.div>
@@ -117,7 +114,7 @@ export function Hero() {
                 className="text-center p-4 rounded-xl hover:bg-card/30 transition-colors"
               >
                 <motion.div
-                  className="font-display font-bold text-3xl md:text-4xl text-foreground mb-2"
+                  className="font-display font-bold text-3xl md:text-4xl text-primary mb-2"
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{
@@ -129,7 +126,7 @@ export function Hero() {
                 >
                   {stat.value}
                 </motion.div>
-                <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                <div className="text-xs text-foreground/60 font-medium uppercase tracking-wider">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -140,7 +137,7 @@ export function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 2.4 }}
-          className="mt-24 flex flex-wrap justify-center items-center gap-6 md:gap-10 text-muted-foreground"
+          className="mt-24 flex flex-wrap justify-center items-center gap-6 md:gap-10 text-foreground/60"
         >
           <motion.div
             className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-card/30 transition-colors"
@@ -153,7 +150,7 @@ export function Hero() {
             className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-card/30 transition-colors"
             whileHover={{ scale: 1.05 }}
           >
-            <TrendingUp className="w-4 h-4 text-accent" />
+            <TrendingUp className="w-4 h-4 text-primary" />
             <span className="text-sm">Enterprise Ready</span>
           </motion.div>
           <span className="text-sm px-4 py-2">Trusted by traders worldwide</span>

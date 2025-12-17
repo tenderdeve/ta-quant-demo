@@ -12,6 +12,7 @@ const problems = [
     description:
       "Managing multiple exchange accounts, different APIs, and fragmented liquidity. No unified view of your portfolio.",
     color: "from-red-500 to-orange-500",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop&q=80",
   },
   {
     icon: Code,
@@ -19,6 +20,7 @@ const problems = [
     description:
       "Building algorithmic trading systems requires deep technical expertise. Most traders can't access proven strategies.",
     color: "from-purple-500 to-pink-500",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=600&h=400&fit=crop&q=80",
   },
   {
     icon: TrendingUp,
@@ -26,6 +28,7 @@ const problems = [
     description:
       "Marketing measured by impressions, not outcomes. No way to connect campaigns to actual trading volume.",
     color: "from-blue-500 to-cyan-500",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop&q=80",
   },
 ];
 
@@ -51,19 +54,30 @@ export function ProblemsSection() {
           {problems.map((problem, index) => (
             <AnimatedCard key={problem.title} delay={index * 0.15} tiltIntensity={8}>
               <motion.div
-                className="glass rounded-2xl md:rounded-3xl p-8 md:p-10 border border-border/40 hover:border-primary/30 transition-all duration-300 h-full group"
+                className="glass rounded-2xl md:rounded-3xl p-0 border border-border/40 hover:border-primary/30 transition-all duration-300 h-full group overflow-hidden"
                 whileHover={{ y: -4 }}
               >
-                <motion.div
-                  className={`w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br ${problem.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}
-                  whileHover={{ rotate: 5 }}
-                >
-                  <problem.icon className="w-7 h-7 md:w-8 md:h-8 text-white" />
-                </motion.div>
-                <h3 className="font-display font-bold text-xl md:text-2xl mb-4">
-                  {problem.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">{problem.description}</p>
+                {/* Problem Image */}
+                <div className="relative w-full h-48 overflow-hidden">
+                  <img 
+                    src={problem.image} 
+                    alt={problem.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+                  <motion.div
+                    className="absolute top-4 right-4 w-12 h-12 rounded-xl bg-primary/90 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform glow-primary/50"
+                    whileHover={{ rotate: 5 }}
+                  >
+                    <problem.icon className="w-6 h-6 text-black" />
+                  </motion.div>
+                </div>
+                <div className="p-8 md:p-10">
+                  <h3 className="font-display font-bold text-xl md:text-2xl mb-4">
+                    {problem.title}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">{problem.description}</p>
+                </div>
               </motion.div>
             </AnimatedCard>
           ))}

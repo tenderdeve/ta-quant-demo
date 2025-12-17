@@ -94,22 +94,21 @@ export function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-strong py-3" : "py-5"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-sm ${
+        isScrolled ? "py-3 border-b border-border/20" : "py-5"
       }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex items-center">
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex items-center gap-3"
+            className="flex items-center"
           >
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-              <span className="font-display font-bold text-primary-foreground text-lg">TA</span>
-            </div>
-            <span className="font-display font-bold text-xl text-foreground">
-              TA Quant
-            </span>
+            <img 
+              src="/ta-quant-logo.png" 
+              alt="TA Quant" 
+              className="h-8 w-auto"
+            />
           </motion.div>
         </Link>
 
@@ -134,17 +133,17 @@ export function Navbar() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`relative font-medium transition-colors hover:text-primary ${
+                className={`relative font-medium transition-colors hover:text-foreground ${
                   location.pathname === link.path
-                    ? "text-primary"
-                    : "text-muted-foreground"
+                    ? "text-foreground"
+                    : "text-foreground/70"
                 }`}
               >
                 {link.name}
                 {location.pathname === link.path && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary rounded-full glow-primary"
                   />
                 )}
               </Link>
@@ -171,11 +170,11 @@ export function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          <Button variant="ghost" className="text-muted-foreground hover:text-foreground">
+          <Button variant="ghost" className="text-foreground/70 hover:text-foreground">
             Sign In
           </Button>
-          <Button className="bg-primary hover:bg-primary/90 text-primary-foreground glow-primary">
-            Get Demo
+          <Button className="bg-white hover:bg-white/90 text-black font-semibold rounded-md px-6">
+            LAUNCH APP
           </Button>
         </div>
 
@@ -211,7 +210,7 @@ export function Navbar() {
                           className={`pl-4 font-medium py-2 transition-colors ${
                             location.pathname === item.path
                               ? "text-primary"
-                              : "text-muted-foreground"
+                              : "text-foreground/70"
                           }`}
                         >
                           {item.name}
@@ -227,7 +226,7 @@ export function Navbar() {
                     className={`font-medium py-2 transition-colors ${
                       location.pathname === link.path
                         ? "text-primary"
-                        : "text-muted-foreground"
+                        : "text-foreground/70"
                     }`}
                   >
                     {link.name}
@@ -249,12 +248,12 @@ export function Navbar() {
               >
                 Pricing
               </a> */}
-              <div className="flex flex-col gap-3 pt-4 border-t border-border">
-                <Button variant="ghost" className="justify-start">
+              <div className="flex flex-col gap-3 pt-4 border-t border-border/20">
+                <Button variant="ghost" className="justify-start text-foreground/70">
                   Sign In
                 </Button>
-                <Button className="bg-primary hover:bg-primary/90">
-                  Get Demo
+                <Button className="bg-white hover:bg-white/90 text-black font-semibold">
+                  LAUNCH APP
                 </Button>
               </div>
             </nav>

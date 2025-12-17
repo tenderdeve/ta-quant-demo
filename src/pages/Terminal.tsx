@@ -117,7 +117,7 @@ const TerminalPage = () => {
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 relative overflow-hidden">
-        <AnimatedBackground variant="blobs" intensity="medium" />
+        <AnimatedBackground variant="network" intensity="high" />
 
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
